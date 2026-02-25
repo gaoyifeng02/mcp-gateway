@@ -1,0 +1,5 @@
+spring:
+  config:
+    name: mcp-gateway-app
+  profiles:
+    active: dev
