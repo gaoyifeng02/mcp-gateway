@@ -36,6 +36,18 @@
             <groupId>com.gaoyifeng</groupId>
             <artifactId>mcp-gateway-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.gaoyifeng</groupId>
+            <artifactId>mcp-gateway-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gaoyifeng</groupId>
+            <artifactId>mcp-gateway-case</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

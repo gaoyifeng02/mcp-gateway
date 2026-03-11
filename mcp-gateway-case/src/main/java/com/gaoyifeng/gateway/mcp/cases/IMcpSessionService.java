@@ -1,4 +1,4 @@
-package com.gaoyifeng.gateway.mcp;
+package com.gaoyifeng.gateway.mcp.cases;
 
 import org.springframework.http.codec.ServerSentEvent;
 import reactor.core.publisher.Flux;
