@@ -127,7 +127,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.gaoyifeng.Application</mainClass>
+                    <mainClass>com.gaoyifeng.gateway.mcp.Application</mainClass>
                     <layout>JAR</layout>
                 </configuration>
             </plugin>
