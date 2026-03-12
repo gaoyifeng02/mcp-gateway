@@ -47,7 +47,7 @@ public class SessionManagementService implements ISessionManagementService {
         Sinks.Many<ServerSentEvent<String>> sink = Sinks.many().multicast().onBackpressureBuffer();
 
         // 发送端点消息 - 告知客户端消息请求地址（客户端第二次会使用 messageEndpoint 进行请求会话）
-        String messageEndpoint = "/" + gatewayId + "/mcp/message?sessionId=" + sessionId;
+        String messageEndpoint = "/api-gateway/" + gatewayId + "/mcp/sse?sessionId=" + sessionId;
         sink.tryEmitNext(ServerSentEvent.<String>builder()
                 .event("endpoint")
                 .data(messageEndpoint)
