@@ -13,7 +13,7 @@ import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 @Component
 public class DefaultMcpSessionFactory {

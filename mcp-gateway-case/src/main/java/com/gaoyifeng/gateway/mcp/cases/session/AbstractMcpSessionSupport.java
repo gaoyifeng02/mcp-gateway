@@ -6,7 +6,7 @@ import com.gaoyifeng.wrench.design.tree.AbstractMultiThreadStrategyRouter;
 import org.springframework.http.codec.ServerSentEvent;
 import reactor.core.publisher.Flux;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 

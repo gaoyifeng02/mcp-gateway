@@ -1,63 +1,91 @@
-26-03-11.16:25:45.799 [main            ] INFO  Application            - Starting Application using Java 21.0.9 on gaoyifeng02 with PID 26796 (D:\workspace\gaoyifeng02\mcp-gateway\mcp-gateway-app\target\classes started by 22449 in D:\workspace\gaoyifeng02\mcp-gateway)
-26-03-11.16:25:45.801 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-03-11.16:25:46.452 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[com.gaoyifeng.gateway.mcp]' package. Please check your configuration.
-26-03-11.16:25:47.014 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8777 (http)
-26-03-11.16:25:47.025 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8777"]
-26-03-11.16:25:47.025 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-03-11.16:25:47.025 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-03-11.16:25:47.148 [main            ] INFO  [/api-gateway]         - Initializing Spring embedded WebApplicationContext
-26-03-11.16:25:47.149 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1289 ms
-26-03-11.16:25:47.238 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mcpGatewayController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mcpSessionService': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.gaoyifeng.gateway.mcp.cases.session.factory.DefaultMcpSessionFactory' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup="", name="", description="", authenticationType=CONTAINER, type=java.lang.Object.class, mappedName="")}
-26-03-11.16:25:47.241 [main            ] INFO  StandardService        - Stopping service [Tomcat]
-26-03-11.16:25:47.261 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
-
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-26-03-11.16:25:47.285 [main            ] ERROR LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-A component required a bean of type 'com.gaoyifeng.gateway.mcp.cases.session.factory.DefaultMcpSessionFactory' that could not be found.
-
-
-Action:
-
-Consider defining a bean of type 'com.gaoyifeng.gateway.mcp.cases.session.factory.DefaultMcpSessionFactory' in your configuration.
-
-26-03-11.16:26:19.042 [main            ] INFO  Application            - Starting Application using Java 21.0.9 on gaoyifeng02 with PID 18608 (D:\workspace\gaoyifeng02\mcp-gateway\mcp-gateway-app\target\classes started by 22449 in D:\workspace\gaoyifeng02\mcp-gateway)
-26-03-11.16:26:19.045 [main            ] INFO  Application            - The following 1 profile is active: "dev"
-26-03-11.16:26:19.598 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[com.gaoyifeng.gateway.mcp]' package. Please check your configuration.
-26-03-11.16:26:20.091 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8777 (http)
-26-03-11.16:26:20.099 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8777"]
-26-03-11.16:26:20.100 [main            ] INFO  StandardService        - Starting service [Tomcat]
-26-03-11.16:26:20.100 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
-26-03-11.16:26:20.233 [main            ] INFO  [/api-gateway]         - Initializing Spring embedded WebApplicationContext
-26-03-11.16:26:20.234 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1141 ms
-26-03-11.16:26:20.299 [main            ] INFO  SessionManagementService - 会话管理服务已启动，会话超时时间: 30 分钟
-26-03-11.16:26:20.724 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8777"]
-26-03-11.16:26:20.744 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8777 (http) with context path '/api-gateway'
-26-03-11.16:26:20.752 [main            ] INFO  Application            - Started Application in 2.182 seconds (JVM running for 2.662)
-26-03-11.16:26:58.994 [http-nio-8777-exec-2] INFO  [/api-gateway]         - Initializing Spring DispatcherServlet 'dispatcherServlet'
-26-03-11.16:26:58.994 [http-nio-8777-exec-2] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
-26-03-11.16:26:58.995 [http-nio-8777-exec-2] INFO  DispatcherServlet      - Completed initialization in 1 ms
-26-03-11.16:26:59.033 [http-nio-8777-exec-2] INFO  McpGatewayController   - 建立 MCP SSE 连接，gatewayId:test10001
-26-03-11.16:26:59.036 [http-nio-8777-exec-2] INFO  RootNode               - 创建会话 mcp session RootNode:test10001
-26-03-11.16:26:59.037 [http-nio-8777-exec-2] INFO  SessionNode            - 创建会话-SessionNode:test10001
-26-03-11.16:26:59.037 [http-nio-8777-exec-2] INFO  SessionManagementService - 创建会话 gatewayId:test10001
-26-03-11.16:26:59.059 [http-nio-8777-exec-2] INFO  SessionManagementService - 创建会话 gatewayId:test10001 sessionId:4f71e188-fb76-4105-aaf9-6a34f727de78,当前活跃会话数:1
-26-03-11.16:26:59.060 [http-nio-8777-exec-2] INFO  EndNode                - 创建会话-EndNode:test10001
-26-03-11.16:27:11.015 [http-nio-8777-exec-1] INFO  McpGatewayController   - 建立 MCP SSE 连接，gatewayId:test10001
-26-03-11.16:27:11.015 [http-nio-8777-exec-1] INFO  RootNode               - 创建会话 mcp session RootNode:test10001
-26-03-11.16:27:11.015 [http-nio-8777-exec-1] INFO  SessionNode            - 创建会话-SessionNode:test10001
-26-03-11.16:27:11.015 [http-nio-8777-exec-1] INFO  SessionManagementService - 创建会话 gatewayId:test10001
-26-03-11.16:27:11.015 [http-nio-8777-exec-1] INFO  SessionManagementService - 创建会话 gatewayId:test10001 sessionId:9b0ff7fd-e809-42c0-be4e-010aa7e8b513,当前活跃会话数:2
-26-03-11.16:27:11.015 [http-nio-8777-exec-1] INFO  EndNode                - 创建会话-EndNode:test10001
-26-03-11.16:27:59.092 [async-mvc-3     ] INFO  EndNode                - SSE连接取消，会话ID: 4f71e188-fb76-4105-aaf9-6a34f727de78
-26-03-11.16:27:59.092 [async-mvc-3     ] INFO  SessionManagementService - 删除会话配置 sessionId:4f71e188-fb76-4105-aaf9-6a34f727de78
-26-03-11.16:27:59.092 [async-mvc-3     ] INFO  SessionManagementService - 移除会话:4f71e188-fb76-4105-aaf9-6a34f727de78,剩余活跃会话数:1
-26-03-11.16:28:11.021 [async-mvc-4     ] INFO  EndNode                - SSE连接取消，会话ID: 9b0ff7fd-e809-42c0-be4e-010aa7e8b513
-26-03-11.16:28:11.021 [async-mvc-4     ] INFO  SessionManagementService - 删除会话配置 sessionId:9b0ff7fd-e809-42c0-be4e-010aa7e8b513
-26-03-11.16:28:11.021 [async-mvc-4     ] INFO  SessionManagementService - 移除会话:9b0ff7fd-e809-42c0-be4e-010aa7e8b513,剩余活跃会话数:0
+26-03-12.15:11:53.735 [main            ] INFO  Application            - Starting Application using Java 21.0.9 on gaoyifeng02 with PID 25108 (D:\workspace\gaoyifeng02\mcp-gateway\mcp-gateway-app\target\classes started by 22449 in D:\workspace\gaoyifeng02\mcp-gateway)
+26-03-12.15:11:53.737 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-03-12.15:11:54.398 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[com.gaoyifeng.gateway.mcp]' package. Please check your configuration.
+26-03-12.15:11:54.952 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8777 (http)
+26-03-12.15:11:54.963 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8777"]
+26-03-12.15:11:54.963 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-03-12.15:11:54.963 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-03-12.15:11:55.102 [main            ] INFO  [/api-gateway]         - Initializing Spring embedded WebApplicationContext
+26-03-12.15:11:55.102 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1303 ms
+26-03-12.15:11:55.184 [main            ] INFO  SessionManagementService - 会话管理服务已启动，会话超时时间: 30 分钟
+26-03-12.15:11:55.594 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8777"]
+26-03-12.15:11:55.626 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8777 (http) with context path '/api-gateway'
+26-03-12.15:11:55.634 [main            ] INFO  Application            - Started Application in 2.508 seconds (JVM running for 3.089)
+26-03-12.15:25:41.979 [http-nio-8777-exec-1] INFO  [/api-gateway]         - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-03-12.15:25:41.979 [http-nio-8777-exec-1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-03-12.15:25:41.980 [http-nio-8777-exec-1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-03-12.15:25:42.008 [http-nio-8777-exec-1] INFO  McpGatewayController   - 建立 MCP SSE 连接，gatewayId:test10001
+26-03-12.15:25:42.011 [http-nio-8777-exec-1] INFO  RootNode               - 创建会话 mcp session RootNode:test10001
+26-03-12.15:25:42.011 [http-nio-8777-exec-1] INFO  SessionNode            - 创建会话-SessionNode:test10001
+26-03-12.15:25:42.011 [http-nio-8777-exec-1] INFO  SessionManagementService - 创建会话 gatewayId:test10001
+26-03-12.15:25:42.028 [http-nio-8777-exec-1] INFO  SessionManagementService - 创建会话 gatewayId:test10001 sessionId:55a33a8f-8a96-496f-a1de-25565f5884bf,当前活跃会话数:1
+26-03-12.15:25:42.028 [http-nio-8777-exec-1] INFO  EndNode                - 创建会话-EndNode:test10001
+26-03-12.15:27:29.652 [main            ] INFO  Application            - Starting Application using Java 21.0.9 with PID 28800 (D:\workspace\gaoyifeng02\mcp-gateway\mcp-gateway-app\target\classes started by 22449 in D:\workspace\gaoyifeng02\mcp-gateway)
+26-03-12.15:27:29.655 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-03-12.15:27:30.905 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port 8777 (http)
+26-03-12.15:27:30.916 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8777"]
+26-03-12.15:27:30.917 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-03-12.15:27:30.918 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/10.1.16]
+26-03-12.15:27:30.996 [main            ] INFO  [/api-gateway]         - Initializing Spring embedded WebApplicationContext
+26-03-12.15:27:30.996 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1281 ms
+26-03-12.15:27:31.058 [main            ] INFO  SessionManagementService - 会话管理服务已启动，会话超时时间: 30 分钟
+26-03-12.15:27:31.458 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8777"]
+26-03-12.15:27:31.477 [main            ] INFO  TomcatWebServer        - Tomcat started on port 8777 (http) with context path '/api-gateway'
+26-03-12.15:27:31.483 [main            ] INFO  Application            - Started Application in 2.52 seconds (process running for 3.083)
+26-03-12.15:31:21.906 [http-nio-8777-exec-1] INFO  [/api-gateway]         - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-03-12.15:31:21.906 [http-nio-8777-exec-1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-03-12.15:31:21.908 [http-nio-8777-exec-1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-03-12.15:31:21.934 [http-nio-8777-exec-1] INFO  McpGatewayController   - 建立 MCP SSE 连接，gatewayId:test10001
+26-03-12.15:31:21.938 [http-nio-8777-exec-1] INFO  RootNode               - 创建会话 mcp session RootNode:test10001
+26-03-12.15:31:21.938 [http-nio-8777-exec-1] INFO  SessionNode            - 创建会话-SessionNode:test10001
+26-03-12.15:31:21.938 [http-nio-8777-exec-1] INFO  SessionManagementService - 创建会话 gatewayId:test10001
+26-03-12.15:31:21.949 [http-nio-8777-exec-1] INFO  SessionManagementService - 创建会话 gatewayId:test10001 sessionId:1d8d8584-c302-4682-be09-1bb0dafd200f,当前活跃会话数:1
+26-03-12.15:31:21.950 [http-nio-8777-exec-1] INFO  EndNode                - 创建会话-EndNode:test10001
+26-03-12.15:32:21.984 [async-mvc-2     ] INFO  EndNode                - SSE连接取消，会话ID: 1d8d8584-c302-4682-be09-1bb0dafd200f
+26-03-12.15:32:21.984 [async-mvc-2     ] INFO  SessionManagementService - 删除会话配置 sessionId:1d8d8584-c302-4682-be09-1bb0dafd200f
+26-03-12.15:32:21.985 [async-mvc-2     ] INFO  SessionManagementService - 移除会话:1d8d8584-c302-4682-be09-1bb0dafd200f,剩余活跃会话数:0
+26-03-12.15:33:34.756 [http-nio-8777-exec-5] INFO  McpGatewayController   - 建立 MCP SSE 连接，gatewayId:test10001
+26-03-12.15:33:34.757 [http-nio-8777-exec-5] INFO  RootNode               - 创建会话 mcp session RootNode:test10001
+26-03-12.15:33:34.757 [http-nio-8777-exec-5] INFO  SessionNode            - 创建会话-SessionNode:test10001
+26-03-12.15:33:34.757 [http-nio-8777-exec-5] INFO  SessionManagementService - 创建会话 gatewayId:test10001
+26-03-12.15:33:34.757 [http-nio-8777-exec-5] INFO  SessionManagementService - 创建会话 gatewayId:test10001 sessionId:f9af084e-cf6d-4ae0-9b28-dfb6e679d914,当前活跃会话数:1
+26-03-12.15:33:34.757 [http-nio-8777-exec-5] INFO  EndNode                - 创建会话-EndNode:test10001
+26-03-12.15:34:24.153 [http-nio-8777-exec-8] INFO  McpGatewayController   - 建立 MCP SSE 连接，gatewayId:test10001
+26-03-12.15:34:24.153 [http-nio-8777-exec-8] INFO  RootNode               - 创建会话 mcp session RootNode:test10001
+26-03-12.15:34:24.153 [http-nio-8777-exec-8] INFO  SessionNode            - 创建会话-SessionNode:test10001
+26-03-12.15:34:24.153 [http-nio-8777-exec-8] INFO  SessionManagementService - 创建会话 gatewayId:test10001
+26-03-12.15:34:24.153 [http-nio-8777-exec-8] INFO  SessionManagementService - 创建会话 gatewayId:test10001 sessionId:b6507113-74b7-464d-aa55-b9cccef46bc4,当前活跃会话数:2
+26-03-12.15:34:24.154 [http-nio-8777-exec-8] INFO  EndNode                - 创建会话-EndNode:test10001
+26-03-12.15:34:34.762 [async-mvc-5     ] INFO  EndNode                - SSE连接取消，会话ID: f9af084e-cf6d-4ae0-9b28-dfb6e679d914
+26-03-12.15:34:34.762 [async-mvc-5     ] INFO  SessionManagementService - 删除会话配置 sessionId:f9af084e-cf6d-4ae0-9b28-dfb6e679d914
+26-03-12.15:34:34.762 [async-mvc-5     ] INFO  SessionManagementService - 移除会话:f9af084e-cf6d-4ae0-9b28-dfb6e679d914,剩余活跃会话数:1
+26-03-12.15:36:31.677 [http-nio-8777-exec-4] INFO  McpGatewayController   - 建立 MCP SSE 连接，gatewayId:test10001
+26-03-12.15:36:31.677 [http-nio-8777-exec-4] INFO  RootNode               - 创建会话 mcp session RootNode:test10001
+26-03-12.15:36:31.677 [http-nio-8777-exec-4] INFO  SessionNode            - 创建会话-SessionNode:test10001
+26-03-12.15:36:31.677 [http-nio-8777-exec-4] INFO  SessionManagementService - 创建会话 gatewayId:test10001
+26-03-12.15:36:31.677 [http-nio-8777-exec-4] INFO  SessionManagementService - 创建会话 gatewayId:test10001 sessionId:93f44661-771f-409e-9965-03117029e2a8,当前活跃会话数:2
+26-03-12.15:36:31.677 [http-nio-8777-exec-4] INFO  EndNode                - 创建会话-EndNode:test10001
+26-03-12.15:41:38.219 [http-nio-8777-exec-7] INFO  McpGatewayController   - 建立 MCP SSE 连接，gatewayId:test10001
+26-03-12.15:41:38.220 [http-nio-8777-exec-7] INFO  RootNode               - 创建会话 mcp session RootNode:test10001
+26-03-12.15:41:38.220 [http-nio-8777-exec-7] INFO  SessionNode            - 创建会话-SessionNode:test10001
+26-03-12.15:41:38.220 [http-nio-8777-exec-7] INFO  SessionManagementService - 创建会话 gatewayId:test10001
+26-03-12.15:41:38.220 [http-nio-8777-exec-7] INFO  SessionManagementService - 创建会话 gatewayId:test10001 sessionId:964f22ed-a00a-4816-bf6b-9b075414b415,当前活跃会话数:3
+26-03-12.15:41:38.221 [http-nio-8777-exec-7] INFO  EndNode                - 创建会话-EndNode:test10001
+26-03-12.15:41:52.330 [http-nio-8777-exec-10] INFO  McpGatewayController   - 建立 MCP SSE 连接，gatewayId:test10001
+26-03-12.15:41:52.330 [http-nio-8777-exec-10] INFO  RootNode               - 创建会话 mcp session RootNode:test10001
+26-03-12.15:41:52.330 [http-nio-8777-exec-10] INFO  SessionNode            - 创建会话-SessionNode:test10001
+26-03-12.15:41:52.330 [http-nio-8777-exec-10] INFO  SessionManagementService - 创建会话 gatewayId:test10001
+26-03-12.15:41:52.330 [http-nio-8777-exec-10] INFO  SessionManagementService - 创建会话 gatewayId:test10001 sessionId:0551120d-5344-44dd-ab39-ee88901e50f6,当前活跃会话数:4
+26-03-12.15:41:52.330 [http-nio-8777-exec-10] INFO  EndNode                - 创建会话-EndNode:test10001
+26-03-12.15:42:38.228 [async-mvc-3     ] INFO  EndNode                - SSE连接取消，会话ID: 964f22ed-a00a-4816-bf6b-9b075414b415
+26-03-12.15:42:38.228 [async-mvc-3     ] INFO  SessionManagementService - 删除会话配置 sessionId:964f22ed-a00a-4816-bf6b-9b075414b415
+26-03-12.15:42:38.228 [async-mvc-3     ] INFO  SessionManagementService - 移除会话:964f22ed-a00a-4816-bf6b-9b075414b415,剩余活跃会话数:3
+26-03-12.15:44:26.580 [http-nio-8777-exec-5] INFO  EndNode                - SSE连接取消，会话ID: 93f44661-771f-409e-9965-03117029e2a8
+26-03-12.15:44:26.580 [http-nio-8777-exec-2] INFO  EndNode                - SSE连接取消，会话ID: 0551120d-5344-44dd-ab39-ee88901e50f6
+26-03-12.15:44:26.580 [http-nio-8777-exec-3] INFO  EndNode                - SSE连接取消，会话ID: b6507113-74b7-464d-aa55-b9cccef46bc4
+26-03-12.15:44:26.580 [http-nio-8777-exec-5] INFO  SessionManagementService - 删除会话配置 sessionId:93f44661-771f-409e-9965-03117029e2a8
+26-03-12.15:44:26.580 [http-nio-8777-exec-2] INFO  SessionManagementService - 删除会话配置 sessionId:0551120d-5344-44dd-ab39-ee88901e50f6
+26-03-12.15:44:26.580 [http-nio-8777-exec-3] INFO  SessionManagementService - 删除会话配置 sessionId:b6507113-74b7-464d-aa55-b9cccef46bc4
+26-03-12.15:44:26.580 [http-nio-8777-exec-5] INFO  SessionManagementService - 移除会话:93f44661-771f-409e-9965-03117029e2a8,剩余活跃会话数:0
+26-03-12.15:44:26.580 [http-nio-8777-exec-3] INFO  SessionManagementService - 移除会话:b6507113-74b7-464d-aa55-b9cccef46bc4,剩余活跃会话数:0
+26-03-12.15:44:26.580 [http-nio-8777-exec-2] INFO  SessionManagementService - 移除会话:0551120d-5344-44dd-ab39-ee88901e50f6,剩余活跃会话数:0

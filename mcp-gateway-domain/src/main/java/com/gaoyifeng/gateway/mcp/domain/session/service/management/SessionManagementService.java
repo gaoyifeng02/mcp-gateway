@@ -1,4 +1,4 @@
-package com.gaoyifeng.gateway.mcp.domain.session.service.impl;
+package com.gaoyifeng.gateway.mcp.domain.session.service.management;
 
 import com.gaoyifeng.gateway.mcp.domain.session.model.valobj.SessionConfigVO;
 import com.gaoyifeng.gateway.mcp.domain.session.service.ISessionManagementService;
