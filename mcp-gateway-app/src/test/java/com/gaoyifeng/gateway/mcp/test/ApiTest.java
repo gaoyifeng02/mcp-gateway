@@ -23,6 +23,27 @@ public class ApiTest {
     @Resource
     private ChatClient.Builder chatClientBuilder;
 
+    /**
+     * 用于调试前面章节实现的mcp ai-mcp-gateway-demo-mcp-json-rpc
+     *
+     * 源码类；
+     * - WebFluxSseServerTransportProvider
+     * - McpSchema
+     */
+    public McpSyncClient sseMcpClient03() {
+        HttpClientSseClientTransport sseClientTransport = HttpClientSseClientTransport
+                .builder("http://127.0.0.1:8777")
+                .sseEndpoint("/sse")
+                .build();
+
+        McpSyncClient mcpSyncClient = McpClient.sync(sseClientTransport).requestTimeout(Duration.ofMinutes(36000)).build();
+        var init_sse = mcpSyncClient.initialize();
+        log.info("Tool SSE MCP03 Initialized {}", init_sse);
+
+        return mcpSyncClient;
+    }
+
+
     @Test
     public void test_mcp() {
         ChatClient chatClient = chatClientBuilder.defaultOptions(
@@ -33,7 +54,7 @@ public class ApiTest {
                 .build();
 
         // 有哪些工具可以使用
-        log.info("测试结果:{}", chatClient.prompt("有哪些工具可以使用").call().content());
+        log.info("测试结果:{}", chatClient.prompt("把gaoyifeng转换为大写").call().content());
     }
 
     public McpSyncClient sseMcpClient02() {

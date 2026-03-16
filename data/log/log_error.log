@@ -1,2 +1,0 @@
-26-03-12.15:11:54.398 [main            ] WARN  ClassPathMapperScanner - No MyBatis mapper was found in '[com.gaoyifeng.gateway.mcp]' package. Please check your configuration.
-26-03-12.16:22:36.937 [http-nio-8777-exec-3] WARN  DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]

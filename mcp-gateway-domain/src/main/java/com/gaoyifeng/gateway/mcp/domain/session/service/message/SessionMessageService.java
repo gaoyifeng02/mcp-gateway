@@ -1,5 +1,6 @@
 package com.gaoyifeng.gateway.mcp.domain.session.service.message;
 
+import com.alibaba.fastjson.JSON;
 import com.gaoyifeng.gateway.mcp.domain.session.model.valobj.McpSchemaVO;
 import com.gaoyifeng.gateway.mcp.domain.session.model.valobj.enums.SessionMessageHandlerMethodEnum;
 import com.gaoyifeng.gateway.mcp.domain.session.service.ISessionMessageService;
@@ -22,24 +23,36 @@ public class SessionMessageService implements ISessionMessageService {
     private Map<String, IRequestHandler> requestHandlerMap;
 
     @Override
-    public McpSchemaVO.JSONRPCResponse processHandlerMessage(McpSchemaVO.JSONRPCRequest request) {
-        String method = request.method();
-        log.info("开始处理请求，方法: {}", method);
-
-        SessionMessageHandlerMethodEnum sessionMessageHandlerMethodEnum = SessionMessageHandlerMethodEnum.getByMethod(method);
-        if (null == sessionMessageHandlerMethodEnum) {
-            throw new AppException(METHOD_NOT_FOUND.getCode(), METHOD_NOT_FOUND.getInfo());
+    public McpSchemaVO.JSONRPCResponse processHandlerMessage(McpSchemaVO.JSONRPCMessage message) {
+        if (message instanceof McpSchemaVO.JSONRPCResponse response) {
+            log.info("收到结果消息");
         }
 
-        String handlerName = sessionMessageHandlerMethodEnum.getHandlerName();
-        IRequestHandler requestHandler = requestHandlerMap.get(handlerName);
+        if (message instanceof McpSchemaVO.JSONRPCRequest request) {
+            String method = request.method();
+            log.info("开始处理请求，方法: {}", method);
 
-        if (null == requestHandler) {
-            throw new AppException(METHOD_NOT_FOUND.getCode(), METHOD_NOT_FOUND.getInfo());
+            SessionMessageHandlerMethodEnum sessionMessageHandlerMethodEnum = SessionMessageHandlerMethodEnum.getByMethod(method);
+            if (null == sessionMessageHandlerMethodEnum) {
+                throw new AppException(METHOD_NOT_FOUND.getCode(), METHOD_NOT_FOUND.getInfo());
+            }
+
+            String handlerName = sessionMessageHandlerMethodEnum.getHandlerName();
+            IRequestHandler requestHandler = requestHandlerMap.get(handlerName);
+
+            if (null == requestHandler) {
+                throw new AppException(METHOD_NOT_FOUND.getCode(), METHOD_NOT_FOUND.getInfo());
+            }
+
+            // 使用枚举策略模式处理请求
+            return requestHandler.handle(request);
         }
 
-        // 使用枚举策略模式处理请求
-        return requestHandler.handle(request);
+        if (message instanceof McpSchemaVO.JSONRPCNotification notification) {
+            log.info("收到即将处理的通知 {} {}", notification.method(), JSON.toJSONString(notification.params()));
+        }
+
+        return null;
     }
 
 }
