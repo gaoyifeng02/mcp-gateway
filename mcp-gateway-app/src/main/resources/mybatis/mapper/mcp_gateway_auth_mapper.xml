@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaoyifeng.gateway.mcp.infrastructure.dao.IMcpGatewayAuthDao">
+
+    <resultMap id="McpGatewayAuthMap" type="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpGatewayAuthPO">
+        <id column="id" property="id"/>
+        <result column="gateway_id" property="gatewayId"/>
+        <result column="api_key" property="apiKey"/>
+        <result column="rate_limit" property="rateLimit"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpGatewayAuthPO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO mcp_gateway_auth(gateway_id, api_key, rate_limit, expire_time, status, create_time, update_time)
+        VALUES(#{gatewayId}, #{apiKey}, #{rateLimit}, #{expireTime}, #{status}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="updateById" parameterType="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpGatewayAuthPO">
+        UPDATE mcp_gateway_auth
+        SET api_key = #{apiKey},
+            rate_limit = #{rateLimit},
+            expire_time = #{expireTime},
+            status = #{status},
+            update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM mcp_gateway_auth WHERE id = #{id}
+    </delete>
+
+    <select id="queryById" resultMap="McpGatewayAuthMap">
+        SELECT id, gateway_id, api_key, rate_limit, expire_time, status, create_time, update_time
+        FROM mcp_gateway_auth
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryByGatewayId" resultMap="McpGatewayAuthMap">
+        SELECT id, gateway_id, api_key, rate_limit, expire_time, status, create_time, update_time
+        FROM mcp_gateway_auth
+        WHERE gateway_id = #{gatewayId}
+    </select>
+
+    <select id="queryByApiKey" resultMap="McpGatewayAuthMap">
+        SELECT id, gateway_id, api_key, rate_limit, expire_time, status, create_time, update_time
+        FROM mcp_gateway_auth
+        WHERE api_key = #{apiKey}
+    </select>
+
+    <select id="queryAll" resultMap="McpGatewayAuthMap">
+        SELECT id, gateway_id, api_key, rate_limit, expire_time, status, create_time, update_time
+        FROM mcp_gateway_auth
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="queryByStatus" resultMap="McpGatewayAuthMap">
+        SELECT id, gateway_id, api_key, rate_limit, expire_time, status, create_time, update_time
+        FROM mcp_gateway_auth
+        WHERE status = #{status}
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

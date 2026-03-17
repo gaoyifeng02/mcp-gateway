@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaoyifeng.gateway.mcp.infrastructure.dao.IMcpGatewayDao">
+
+    <resultMap id="McpGatewayMap" type="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpGatewayPO">
+        <id column="id" property="id"/>
+        <result column="gateway_id" property="gatewayId"/>
+        <result column="gateway_name" property="gatewayName"/>
+        <result column="gateway_desc" property="gatewayDesc"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpGatewayPO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO mcp_gateway(gateway_id, gateway_name, gateway_desc, status, create_time, update_time)
+        VALUES(#{gatewayId}, #{gatewayName}, #{gatewayDesc}, #{status}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="updateById" parameterType="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpGatewayPO">
+        UPDATE mcp_gateway
+        SET gateway_name = #{gatewayName},
+            gateway_desc = #{gatewayDesc},
+            status = #{status},
+            update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM mcp_gateway WHERE id = #{id}
+    </delete>
+
+    <select id="queryById" resultMap="McpGatewayMap">
+        SELECT id, gateway_id, gateway_name, gateway_desc, status, create_time, update_time
+        FROM mcp_gateway
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryByGatewayId" resultMap="McpGatewayMap">
+        SELECT id, gateway_id, gateway_name, gateway_desc, status, create_time, update_time
+        FROM mcp_gateway
+        WHERE gateway_id = #{gatewayId}
+    </select>
+
+    <select id="queryAll" resultMap="McpGatewayMap">
+        SELECT id, gateway_id, gateway_name, gateway_desc, status, create_time, update_time
+        FROM mcp_gateway
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="queryByStatus" resultMap="McpGatewayMap">
+        SELECT id, gateway_id, gateway_name, gateway_desc, status, create_time, update_time
+        FROM mcp_gateway
+        WHERE status = #{status}
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>
