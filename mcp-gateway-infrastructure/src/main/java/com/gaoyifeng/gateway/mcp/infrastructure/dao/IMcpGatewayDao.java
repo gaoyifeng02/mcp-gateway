@@ -69,4 +69,9 @@ public interface IMcpGatewayDao {
      * @return 网关配置列表
      */
     List<McpGatewayPO> queryByStatus(@Param("status") Integer status);
+
+
+    McpGatewayPO queryMcpGatewayByGatewayId(String gatewayId);
+
+
 }

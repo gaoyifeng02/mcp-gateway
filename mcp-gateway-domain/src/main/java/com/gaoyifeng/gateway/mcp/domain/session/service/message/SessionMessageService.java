@@ -23,7 +23,7 @@ public class SessionMessageService implements ISessionMessageService {
     private Map<String, IRequestHandler> requestHandlerMap;
 
     @Override
-    public McpSchemaVO.JSONRPCResponse processHandlerMessage(McpSchemaVO.JSONRPCMessage message) {
+    public McpSchemaVO.JSONRPCResponse processHandlerMessage(String gatewayId,McpSchemaVO.JSONRPCMessage message) {
         if (message instanceof McpSchemaVO.JSONRPCResponse response) {
             log.info("收到结果消息");
         }
@@ -45,7 +45,7 @@ public class SessionMessageService implements ISessionMessageService {
             }
 
             // 使用枚举策略模式处理请求
-            return requestHandler.handle(request);
+            return requestHandler.handle(gatewayId,request);
         }
 
         if (message instanceof McpSchemaVO.JSONRPCNotification notification) {

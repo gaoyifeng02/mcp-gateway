@@ -86,4 +86,9 @@ public interface IMcpProtocolRegistryDao {
      * @return 工具注册列表
      */
     List<McpProtocolRegistryPO> queryByStatus(@Param("status") Integer status);
+
+
+    McpProtocolRegistryPO queryMcpProtocolRegistryByGatewayId(String gatewayId);
+
+
 }

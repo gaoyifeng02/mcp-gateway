@@ -12,7 +12,7 @@ import java.util.Map;
 public class InitializeHandler implements IRequestHandler {
 
     @Override
-    public McpSchemaVO.JSONRPCResponse handle(McpSchemaVO.JSONRPCRequest message) {
+    public McpSchemaVO.JSONRPCResponse handle(String gatewayId, McpSchemaVO.JSONRPCRequest message) {
 
         log.info("模拟处理初始化请求");
 
