@@ -14,6 +14,8 @@ import java.util.Map;
 @Slf4j
 public final class McpSchemaVO {
 
+    public static final String JSONRPC_VERSION = "2.0";
+
     //可以避免泛型擦除，导致序列化问题
     private static final TypeReference<HashMap<String, Object>> MAP_TYPE_REF = new TypeReference<>() {
     };
@@ -54,6 +56,9 @@ public final class McpSchemaVO {
             @JsonProperty("params") Object params) implements JSONRPCMessage {
     }
 
+    public static  <T> T unmarshalFrom(Object data, TypeReference<T> typeRef) {
+        return objectMapper.convertValue(data, typeRef);
+    }
 
     /**
      * 请求对象
