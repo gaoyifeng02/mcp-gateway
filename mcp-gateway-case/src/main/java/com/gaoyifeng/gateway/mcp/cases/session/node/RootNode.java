@@ -1,6 +1,5 @@
 package com.gaoyifeng.gateway.mcp.cases.session.node;
 
-
 import com.gaoyifeng.gateway.mcp.cases.session.AbstractMcpSessionSupport;
 import com.gaoyifeng.gateway.mcp.cases.session.factory.DefaultMcpSessionFactory;
 import com.gaoyifeng.wrench.design.tree.StrategyHandler;
@@ -11,15 +10,16 @@ import reactor.core.publisher.Flux;
 
 import jakarta.annotation.Resource;
 
+
 @Slf4j
-@Service
+@Service("mcpSessionRootNode")
 public class RootNode extends AbstractMcpSessionSupport {
 
-    @Resource
+    @Resource(name = "mcpSessionVerifyNode")
     private VerifyNode verifyNode;
 
     @Override
-    protected Flux<ServerSentEvent<String>> doApply(String requestParameter, DefaultMcpSessionFactory.DynamicContext dynamicContext) throws Exception {
+    protected Flux<ServerSentEvent<String>> doApply(String requestParameter, DefaultMcpSessionFactory.SessionDynamicContext dynamicContext) throws Exception {
         try {
             log.info("创建会话 mcp session RootNode:{}", requestParameter);
 
@@ -31,7 +31,7 @@ public class RootNode extends AbstractMcpSessionSupport {
     }
 
     @Override
-    public StrategyHandler<String, DefaultMcpSessionFactory.DynamicContext, Flux<ServerSentEvent<String>>> get(String s, DefaultMcpSessionFactory.DynamicContext dynamicContext) throws Exception {
+    public StrategyHandler<String, DefaultMcpSessionFactory.SessionDynamicContext, Flux<ServerSentEvent<String>>> get(String requestParameter, DefaultMcpSessionFactory.SessionDynamicContext dynamicContext) throws Exception {
         return verifyNode;
     }
 

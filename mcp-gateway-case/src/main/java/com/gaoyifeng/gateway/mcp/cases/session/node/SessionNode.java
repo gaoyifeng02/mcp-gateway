@@ -11,19 +11,20 @@ import reactor.core.publisher.Flux;
 
 import jakarta.annotation.Resource;
 
+
 @Slf4j
-@Service
+@Service("mcpSessionSessionNode")
 public class SessionNode extends AbstractMcpSessionSupport {
 
-    @Resource
+    @Resource(name = "mcpSessionEndNode")
     private EndNode endNode;
 
     @Override
-    protected Flux<ServerSentEvent<String>> doApply(String requestParameter, DefaultMcpSessionFactory.DynamicContext dynamicContext) throws Exception {
+    protected Flux<ServerSentEvent<String>> doApply(String requestParameter, DefaultMcpSessionFactory.SessionDynamicContext dynamicContext) throws Exception {
         log.info("创建会话-SessionNode:{}", requestParameter);
 
         // 创建会话服务
-        SessionConfigVO sessionConfigVO = sessionManagementService.createSession(requestParameter);
+        SessionConfigVO sessionConfigVO = sessionManagementService.createSession(requestParameter, dynamicContext.getApiKey());
 
         // 写入上下文中
         dynamicContext.setSessionConfigVO(sessionConfigVO);
@@ -32,7 +33,8 @@ public class SessionNode extends AbstractMcpSessionSupport {
     }
 
     @Override
-    public StrategyHandler<String, DefaultMcpSessionFactory.DynamicContext, Flux<ServerSentEvent<String>>> get(String requestParameter, DefaultMcpSessionFactory.DynamicContext dynamicContext) throws Exception {
+    public StrategyHandler<String, DefaultMcpSessionFactory.SessionDynamicContext, Flux<ServerSentEvent<String>>> get(String requestParameter, DefaultMcpSessionFactory.SessionDynamicContext dynamicContext) throws Exception {
         return endNode;
     }
+
 }

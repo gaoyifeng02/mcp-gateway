@@ -76,4 +76,20 @@ public interface IMcpGatewayAuthDao {
      * @return 网关权限配置列表
      */
     List<McpGatewayAuthPO> queryByStatus(@Param("status") Integer status);
+
+    /**
+     * 查询有效的网关权限配置数量
+     *
+     * @param gatewayId 网关ID
+     * @return 数量
+     */
+    int queryEffectiveGatewayAuthCount(String gatewayId);
+
+    /**
+     * 根据条件查询网关权限配置
+     *
+     * @param req 查询条件
+     * @return 网关权限配置
+     */
+    McpGatewayAuthPO queryMcpGatewayAuthPO(McpGatewayAuthPO req);
 }

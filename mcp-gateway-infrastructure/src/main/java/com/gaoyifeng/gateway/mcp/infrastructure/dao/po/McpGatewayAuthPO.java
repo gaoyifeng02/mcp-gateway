@@ -1,6 +1,11 @@
 package com.gaoyifeng.gateway.mcp.infrastructure.dao.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +15,10 @@ import java.util.Date;
  * @date 2026-03-16
  */
 @Data
-public class McpGatewayAuthPO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class McpGatewayAuthPO implements Serializable {
 
     /**
      * 主键ID

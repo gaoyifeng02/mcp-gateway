@@ -102,4 +102,8 @@ public interface IMcpProtocolMappingDao {
      * @return 映射配置列表
      */
     List<McpProtocolMappingPO> queryByMappingType(@Param("mappingType") String mappingType);
+
+    List<McpProtocolMappingPO> queryMcpGatewayToolConfigList(McpProtocolMappingPO reqPO);
+
+
 }

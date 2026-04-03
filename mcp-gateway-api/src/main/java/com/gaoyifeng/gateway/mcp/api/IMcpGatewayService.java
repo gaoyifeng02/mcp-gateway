@@ -10,9 +10,10 @@ public interface IMcpGatewayService {
     /**
      * 建立 SSE 连接
      * @param gatewayId 网关ID
+     * @param apiKey API密钥（可选）
      * @return 流式响应
      */
-    Flux<ServerSentEvent<String>> establishSSEConnection(String gatewayId) throws Exception;
+    Flux<ServerSentEvent<String>> establishSSEConnection(String gatewayId, String apiKey) throws Exception;
 
 
     /**

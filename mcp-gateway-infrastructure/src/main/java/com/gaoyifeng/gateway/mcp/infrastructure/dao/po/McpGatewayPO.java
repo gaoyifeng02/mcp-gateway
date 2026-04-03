@@ -1,18 +1,19 @@
 package com.gaoyifeng.gateway.mcp.infrastructure.dao.po;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 import java.util.Date;
 
-/**
- * MCP网关配置表 PO对象
- *
- * @author Claude
- * @date 2026-03-16
- */
+
 @Data
 @Builder
-public class McpGatewayPO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class McpGatewayPO implements Serializable {
 
     /**
      * 主键ID
@@ -33,6 +34,11 @@ public class McpGatewayPO {
      * 网关描述
      */
     private String gatewayDesc;
+
+    /**
+     * 认证配置：0-不校验，1-强校验
+     */
+    private Integer auth;
 
     /**
      * 状态：0-禁用，1-启用

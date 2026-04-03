@@ -39,8 +39,8 @@ public class SessionManagementService implements ISessionManagementService {
     }
 
     @Override
-    public SessionConfigVO createSession(String gatewayId) {
-        log.info("创建会话 gatewayId:{}", gatewayId);
+    public SessionConfigVO createSession(String gatewayId, String apiKey) {
+        log.info("创建会话 gatewayId:{} apiKey:{}", gatewayId, apiKey);
 
         String sessionId = UUID.randomUUID().toString();
 

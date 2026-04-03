@@ -63,4 +63,16 @@
         ORDER BY create_time DESC
     </select>
 
+    <select id="queryMcpGatewayAuthPO" parameterType="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpGatewayAuthPO" resultMap="McpGatewayAuthMap">
+        SELECT id, gateway_id, api_key, rate_limit, expire_time, status
+        FROM mcp_gateway_auth
+        WHERE gateway_id = #{gatewayId} AND api_key = #{apiKey}
+    </select>
+
+    <select id="queryEffectiveGatewayAuthCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM mcp_gateway_auth
+        WHERE gateway_id = #{gatewayId} AND status = 1
+    </select>
+
 </mapper>

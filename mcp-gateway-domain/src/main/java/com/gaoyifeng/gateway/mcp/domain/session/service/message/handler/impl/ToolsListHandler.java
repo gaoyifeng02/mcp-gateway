@@ -1,7 +1,9 @@
 package com.gaoyifeng.gateway.mcp.domain.session.service.message.handler.impl;
 
+import com.gaoyifeng.gateway.mcp.domain.session.adapter.repository.ISessionRepository;
 import com.gaoyifeng.gateway.mcp.domain.session.model.valobj.McpSchemaVO;
 import com.gaoyifeng.gateway.mcp.domain.session.service.message.handler.IRequestHandler;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,9 @@ import java.util.Map;
 @Slf4j
 @Service("toolsListHandler")
 public class ToolsListHandler  implements IRequestHandler {
+
+    @Resource
+    private ISessionRepository repository;
 
     @Override
     public McpSchemaVO.JSONRPCResponse handle(String gatewayId, McpSchemaVO.JSONRPCRequest message) {

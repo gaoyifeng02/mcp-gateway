@@ -3,12 +3,7 @@ package com.gaoyifeng.gateway.mcp.infrastructure.dao.po;
 import lombok.Data;
 import java.util.Date;
 
-/**
- * MCP工具注册表 PO对象
- *
- * @author Claude
- * @date 2026-03-16
- */
+
 @Data
 public class McpProtocolRegistryPO {
 

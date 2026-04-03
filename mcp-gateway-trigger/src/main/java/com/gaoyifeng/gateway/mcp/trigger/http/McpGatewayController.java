@@ -1,7 +1,6 @@
 package com.gaoyifeng.gateway.mcp.trigger.http;
 
 
-import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gaoyifeng.gateway.mcp.api.IMcpGatewayService;
 import com.gaoyifeng.gateway.mcp.cases.IMcpSessionService;
@@ -22,7 +21,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import jakarta.annotation.Resource;
-import java.util.Map;
 
 @Slf4j
 @RestController
@@ -44,7 +42,7 @@ public class McpGatewayController implements IMcpGatewayService {
 
 
     public McpGatewayController() {
-        System.out.println("xxxx");
+        log.debug("McpGatewayController init success");
     }
 
     /**
@@ -56,15 +54,16 @@ public class McpGatewayController implements IMcpGatewayService {
      */
     @GetMapping(value = "{gatewayId}/mcp/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     @Override
-    public Flux<ServerSentEvent<String>> establishSSEConnection(@PathVariable("gatewayId") String gatewayId) throws Exception {
+    public Flux<ServerSentEvent<String>> establishSSEConnection(@PathVariable("gatewayId") String gatewayId,
+                                                                 @RequestParam(value = "apiKey", required = false) String apiKey) throws Exception {
         try {
-            log.info("建立 MCP SSE 连接，gatewayId:{}", gatewayId);
+            log.info("建立 MCP SSE 连接，gatewayId:{}, apiKey:{}", gatewayId, apiKey);
             if (StringUtils.isBlank(gatewayId)) {
                 log.info("非法参数，gateway is null");
                 throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
             }
 
-            return mcpSessionService.createMcpSession(gatewayId);
+            return mcpSessionService.createMcpSession(gatewayId, apiKey);
         } catch (Exception e) {
             log.error("建立 MCP SSE 连接失败，gatewayId: {}", gatewayId, e);
             throw e;

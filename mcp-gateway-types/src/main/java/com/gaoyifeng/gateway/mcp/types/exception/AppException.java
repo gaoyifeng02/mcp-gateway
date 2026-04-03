@@ -15,6 +15,11 @@ public class AppException extends RuntimeException {
     /** 异常信息 */
     private String info;
 
+    public AppException(Integer code, String message) {
+        this.code = String.valueOf(code);
+        this.info = message;
+    }
+
     public AppException(String code) {
         this.code = code;
     }

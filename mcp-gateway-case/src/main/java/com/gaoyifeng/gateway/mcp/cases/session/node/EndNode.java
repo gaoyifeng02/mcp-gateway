@@ -12,11 +12,13 @@ import reactor.core.publisher.Sinks;
 
 import java.time.Duration;
 
+
 @Slf4j
-@Service
+@Service("mcpSessionEndNode")
 public class EndNode extends AbstractMcpSessionSupport {
+
     @Override
-    protected Flux<ServerSentEvent<String>> doApply(String requestParameter, DefaultMcpSessionFactory.DynamicContext dynamicContext) throws Exception {
+    protected Flux<ServerSentEvent<String>> doApply(String requestParameter, DefaultMcpSessionFactory.SessionDynamicContext dynamicContext) throws Exception {
         log.info("创建会话-EndNode:{}", requestParameter);
 
         // 获取上下文
@@ -47,7 +49,8 @@ public class EndNode extends AbstractMcpSessionSupport {
     }
 
     @Override
-    public StrategyHandler<String, DefaultMcpSessionFactory.DynamicContext, Flux<ServerSentEvent<String>>> get(String requestParameter, DefaultMcpSessionFactory.DynamicContext dynamicContext) throws Exception {
+    public StrategyHandler<String, DefaultMcpSessionFactory.SessionDynamicContext, Flux<ServerSentEvent<String>>> get(String requestParameter, DefaultMcpSessionFactory.SessionDynamicContext dynamicContext) throws Exception {
         return defaultStrategyHandler;
     }
+
 }

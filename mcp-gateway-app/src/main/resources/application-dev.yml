@@ -29,6 +29,11 @@ spring:
     password: gaoyifeng
     url: jdbc:mysql://127.0.0.1:3306/ai_mcp_gateway?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
     driver-class-name: com.mysql.cj.jdbc.Driver
+#  sql:
+#    init:
+#      mode: always
+#      schema-locations: classpath:sql/ai_mcp_gateway.sql
+#      encoding: UTF-8
   hikari:
     pool-name: Retail_HikariCP
     minimum-idle: 15 #最小空闲连接数量
