@@ -32,6 +32,7 @@ CREATE TABLE `mcp_gateway` (
   `gateway_id` varchar(64) NOT NULL COMMENT '网关唯一标识',
   `gateway_name` varchar(128) NOT NULL COMMENT '网关名称',
   `gateway_desc` varchar(512) DEFAULT NULL COMMENT '网关描述',
+  `auth` tinyint(1) NOT NULL DEFAULT '0' COMMENT '认证配置：0-不校验，1-强校验',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：0-禁用，1-启用',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',

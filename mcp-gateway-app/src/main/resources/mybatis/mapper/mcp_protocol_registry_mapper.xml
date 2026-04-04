@@ -9,6 +9,7 @@
         <result column="tool_name" property="toolName"/>
         <result column="tool_type" property="toolType"/>
         <result column="tool_description" property="toolDescription"/>
+        <result column="tool_version" property="toolVersion"/>
         <result column="http_url" property="httpUrl"/>
         <result column="http_method" property="httpMethod"/>
         <result column="http_headers" property="httpHeaders"/>
@@ -19,9 +20,13 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
+    <sql id="select_columns">
+        id, gateway_id, tool_id, tool_name, tool_type, tool_description, tool_version, http_url, http_method, http_headers, timeout, retry_times, status, create_time, update_time
+    </sql>
+
     <insert id="insert" parameterType="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpProtocolRegistryPO" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO mcp_protocol_registry(gateway_id, tool_id, tool_name, tool_type, tool_description, http_url, http_method, http_headers, timeout, retry_times, status, create_time, update_time)
-        VALUES(#{gatewayId}, #{toolId}, #{toolName}, #{toolType}, #{toolDescription}, #{httpUrl}, #{httpMethod}, #{httpHeaders}, #{timeout}, #{retryTimes}, #{status}, #{createTime}, #{updateTime})
+        INSERT INTO mcp_protocol_registry(gateway_id, tool_id, tool_name, tool_type, tool_description, tool_version, http_url, http_method, http_headers, timeout, retry_times, status, create_time, update_time)
+        VALUES(#{gatewayId}, #{toolId}, #{toolName}, #{toolType}, #{toolDescription}, #{toolVersion}, #{httpUrl}, #{httpMethod}, #{httpHeaders}, #{timeout}, #{retryTimes}, #{status}, #{createTime}, #{updateTime})
     </insert>
 
     <update id="updateById" parameterType="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpProtocolRegistryPO">
@@ -29,6 +34,7 @@
         SET tool_name = #{toolName},
             tool_type = #{toolType},
             tool_description = #{toolDescription},
+            tool_version = #{toolVersion},
             http_url = #{httpUrl},
             http_method = #{httpMethod},
             http_headers = #{httpHeaders},
@@ -44,41 +50,48 @@
     </delete>
 
     <select id="queryById" resultMap="McpProtocolRegistryMap">
-        SELECT id, gateway_id, tool_id, tool_name, tool_type, tool_description, http_url, http_method, http_headers, timeout, retry_times, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_protocol_registry
         WHERE id = #{id}
     </select>
 
     <select id="queryByGatewayId" resultMap="McpProtocolRegistryMap">
-        SELECT id, gateway_id, tool_id, tool_name, tool_type, tool_description, http_url, http_method, http_headers, timeout, retry_times, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_protocol_registry
         WHERE gateway_id = #{gatewayId}
         ORDER BY create_time DESC
     </select>
 
     <select id="queryByToolId" resultMap="McpProtocolRegistryMap">
-        SELECT id, gateway_id, tool_id, tool_name, tool_type, tool_description, http_url, http_method, http_headers, timeout, retry_times, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_protocol_registry
         WHERE tool_id = #{toolId}
     </select>
 
     <select id="queryByGatewayIdAndToolName" resultMap="McpProtocolRegistryMap">
-        SELECT id, gateway_id, tool_id, tool_name, tool_type, tool_description, http_url, http_method, http_headers, timeout, retry_times, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_protocol_registry
         WHERE gateway_id = #{gatewayId} AND tool_name = #{toolName}
     </select>
 
     <select id="queryAll" resultMap="McpProtocolRegistryMap">
-        SELECT id, gateway_id, tool_id, tool_name, tool_type, tool_description, http_url, http_method, http_headers, timeout, retry_times, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_protocol_registry
         ORDER BY create_time DESC
     </select>
 
     <select id="queryByStatus" resultMap="McpProtocolRegistryMap">
-        SELECT id, gateway_id, tool_id, tool_name, tool_type, tool_description, http_url, http_method, http_headers, timeout, retry_times, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_protocol_registry
         WHERE status = #{status}
         ORDER BY create_time DESC
+    </select>
+
+    <select id="queryMcpProtocolRegistryByGatewayId" resultMap="McpProtocolRegistryMap">
+        SELECT <include refid="select_columns"/>
+        FROM mcp_protocol_registry
+        WHERE gateway_id = #{gatewayId} AND status = 1
+        LIMIT 1
     </select>
 
 </mapper>

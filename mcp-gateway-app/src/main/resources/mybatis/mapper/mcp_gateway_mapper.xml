@@ -7,20 +7,26 @@
         <result column="gateway_id" property="gatewayId"/>
         <result column="gateway_name" property="gatewayName"/>
         <result column="gateway_desc" property="gatewayDesc"/>
+        <result column="auth" property="auth"/>
         <result column="status" property="status"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
+    <sql id="select_columns">
+        id, gateway_id, gateway_name, gateway_desc, auth, status, create_time, update_time
+    </sql>
+
     <insert id="insert" parameterType="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpGatewayPO" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO mcp_gateway(gateway_id, gateway_name, gateway_desc, status, create_time, update_time)
-        VALUES(#{gatewayId}, #{gatewayName}, #{gatewayDesc}, #{status}, #{createTime}, #{updateTime})
+        INSERT INTO mcp_gateway(gateway_id, gateway_name, gateway_desc, auth, status, create_time, update_time)
+        VALUES(#{gatewayId}, #{gatewayName}, #{gatewayDesc}, #{auth}, #{status}, #{createTime}, #{updateTime})
     </insert>
 
     <update id="updateById" parameterType="com.gaoyifeng.gateway.mcp.infrastructure.dao.po.McpGatewayPO">
         UPDATE mcp_gateway
         SET gateway_name = #{gatewayName},
             gateway_desc = #{gatewayDesc},
+            auth = #{auth},
             status = #{status},
             update_time = #{updateTime}
         WHERE id = #{id}
@@ -31,28 +37,34 @@
     </delete>
 
     <select id="queryById" resultMap="McpGatewayMap">
-        SELECT id, gateway_id, gateway_name, gateway_desc, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_gateway
         WHERE id = #{id}
     </select>
 
     <select id="queryByGatewayId" resultMap="McpGatewayMap">
-        SELECT id, gateway_id, gateway_name, gateway_desc, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_gateway
         WHERE gateway_id = #{gatewayId}
     </select>
 
     <select id="queryAll" resultMap="McpGatewayMap">
-        SELECT id, gateway_id, gateway_name, gateway_desc, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_gateway
         ORDER BY create_time DESC
     </select>
 
     <select id="queryByStatus" resultMap="McpGatewayMap">
-        SELECT id, gateway_id, gateway_name, gateway_desc, status, create_time, update_time
+        SELECT <include refid="select_columns"/>
         FROM mcp_gateway
         WHERE status = #{status}
         ORDER BY create_time DESC
+    </select>
+
+    <select id="queryMcpGatewayByGatewayId" resultMap="McpGatewayMap">
+        SELECT <include refid="select_columns"/>
+        FROM mcp_gateway
+        WHERE gateway_id = #{gatewayId}
     </select>
 
 </mapper>
