@@ -14,7 +14,7 @@ public enum SessionMessageHandlerMethodEnum {
     TOOLS_LIST("tools/list", "toolsListHandler", "工具列表请求"),
     TOOLS_CALL("tools/call", "toolsCallHandler", "工具调用请求"),
     RESOURCES_LIST("resources/list", "resourcesListHandler", "资源列表请求"),
-
+    PROMPTS_LIST("prompts/list", "promptListHandler", "提示词列表请求"),
     ;
 
     private final String method;
