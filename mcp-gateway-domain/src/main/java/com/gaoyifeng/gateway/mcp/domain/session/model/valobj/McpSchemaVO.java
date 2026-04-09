@@ -9,20 +9,24 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 
 @Slf4j
 public final class McpSchemaVO {
 
+    public static final String LATEST_PROTOCOL_VERSION = "2024-11-05";
+
     public static final String JSONRPC_VERSION = "2.0";
 
-    //可以避免泛型擦除，导致序列化问题
     private static final TypeReference<HashMap<String, Object>> MAP_TYPE_REF = new TypeReference<>() {
     };
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static JSONRPCMessage deserializeJsonRpcMessage(String jsonText) throws IOException {
+    public static JSONRPCMessage deserializeJsonRpcMessage(String jsonText)
+            throws IOException {
 
         log.debug("Received JSON message: {}", jsonText);
 
@@ -39,6 +43,10 @@ public final class McpSchemaVO {
         throw new IllegalArgumentException("Cannot deserialize JSONRPCMessage: " + jsonText);
     }
 
+    public static  <T> T unmarshalFrom(Object data, TypeReference<T> typeRef) {
+        return objectMapper.convertValue(data, typeRef);
+    }
+
     /**
      * JSON-RPC 2.0 Message Types
      */
@@ -46,18 +54,6 @@ public final class McpSchemaVO {
 
         String jsonrpc();
 
-    }
-
-    @JsonInclude(JsonInclude.Include.NON_ABSENT)
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public record JSONRPCNotification(
-            @JsonProperty("jsonrpc") String jsonrpc,
-            @JsonProperty("method") String method,
-            @JsonProperty("params") Object params) implements JSONRPCMessage {
-    }
-
-    public static  <T> T unmarshalFrom(Object data, TypeReference<T> typeRef) {
-        return objectMapper.convertValue(data, typeRef);
     }
 
     /**
@@ -70,9 +66,19 @@ public final class McpSchemaVO {
      */
     @JsonInclude(JsonInclude.Include.NON_ABSENT)
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public record JSONRPCRequest(@JsonProperty("jsonrpc") String jsonrpc, @JsonProperty("method") String method,
+    public record JSONRPCRequest(@JsonProperty("jsonrpc") String jsonrpc,
+                                 @JsonProperty("method") String method,
                                  @JsonProperty("id") Object id,
-                                 @JsonProperty("params") Object params) implements JSONRPCMessage {
+                                 @JsonProperty("params") Object params
+    ) implements JSONRPCMessage {
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_ABSENT)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record JSONRPCNotification(
+            @JsonProperty("jsonrpc") String jsonrpc,
+            @JsonProperty("method") String method,
+            @JsonProperty("params") Object params) implements JSONRPCMessage {
     }
 
     /**
@@ -85,18 +91,23 @@ public final class McpSchemaVO {
      */
     @JsonInclude(JsonInclude.Include.NON_ABSENT)
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public record JSONRPCResponse(@JsonProperty("jsonrpc") String jsonrpc, @JsonProperty("id") Object id,
-                                  @JsonProperty("result") Object result,
-                                  @JsonProperty("error") JSONRPCError error) implements JSONRPCMessage {
+    public record JSONRPCResponse(
+            @JsonProperty("jsonrpc") String jsonrpc,
+            @JsonProperty("id") Object id,
+            @JsonProperty("result") Object result,
+            @JsonProperty("error") JSONRPCError error
+    ) implements JSONRPCMessage {
         @JsonInclude(JsonInclude.Include.NON_ABSENT)
         @JsonIgnoreProperties(ignoreUnknown = true)
-        public record JSONRPCError(@JsonProperty("code") int code, @JsonProperty("message") String message,
-                                   @JsonProperty("data") Object data) {
+        public record JSONRPCError(
+                @JsonProperty("code") int code,
+                @JsonProperty("message") String message,
+                @JsonProperty("data") Object data) {
         }
     }
 
     public sealed interface Request
-            permits InitializeRequest {
+            permits InitializeRequest, CallToolRequest {
 
     }
 
@@ -275,5 +286,66 @@ public final class McpSchemaVO {
                                  @JsonProperty("name") String name,
                                  @JsonProperty("version") String version) {
     } // @formatter:on
+
+    @JsonInclude(JsonInclude.Include.NON_ABSENT)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record ListToolsResult( // @formatter:off
+                                   @JsonProperty("tools") List<Tool> tools,
+                                   @JsonProperty("nextCursor") String nextCursor) {
+    }// @formatter:on
+
+    @JsonInclude(JsonInclude.Include.NON_ABSENT)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record Tool( // @formatter:off
+                        @JsonProperty("name") String name,
+                        @JsonProperty("description") String description,
+                        @JsonProperty("inputSchema") JsonSchema inputSchema) {
+
+        public Tool(String name, String description, String schema) {
+            this(name, description, parseSchema(schema));
+        }
+
+    } // @formatter:on
+
+
+    @JsonInclude(JsonInclude.Include.NON_ABSENT)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record JsonSchema( // @formatter:off
+                              @JsonProperty("type") String type,
+                              @JsonProperty("properties") Map<String, Object> properties,
+                              @JsonProperty("required") List<String> required,
+                              @JsonProperty("additionalProperties") Boolean additionalProperties,
+                              @JsonProperty("$defs") Map<String, Object> defs,
+                              @JsonProperty("definitions") Map<String, Object> definitions) {
+    } // @formatter:on
+
+    private static JsonSchema parseSchema(String schema) {
+        try {
+            return objectMapper.readValue(schema, JsonSchema.class);
+        }
+        catch (IOException e) {
+            throw new IllegalArgumentException("Invalid schema: " + schema, e);
+        }
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_ABSENT)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record CallToolRequest(// @formatter:off
+                                  @JsonProperty("name") String name,
+                                  @JsonProperty("arguments") Map<String, Object> arguments) implements Request {
+
+        public CallToolRequest(String name, String jsonArguments) {
+            this(name, parseJsonArguments(jsonArguments));
+        }
+
+        private static Map<String, Object> parseJsonArguments(String jsonArguments) {
+            try {
+                return objectMapper.readValue(jsonArguments, MAP_TYPE_REF);
+            }
+            catch (IOException e) {
+                throw new IllegalArgumentException("Invalid arguments: " + jsonArguments, e);
+            }
+        }
+    }// @formatter:off
 
 }
